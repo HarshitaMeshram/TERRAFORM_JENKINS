@@ -1,0 +1,622 @@
+JENKINS -2 ASSIGNMENT
+
+
+CREATED TWO CREDS === FOR DOCKER (ACCESS-TOKENS) ==== FOR GIT (ACCESS-TOKENS)
+ 
+
+ADD PLUGINS
+CloudBees Docker Build and Publish plugin
+Docker API Plugin
+Docker Commons Plugin
+Docker Pipeline
+Docker plugin
+Docker Slaves Plugin
+
+FOR DEV 
+Started by user Harshita Meshram
+ > git rev-parse --resolve-git-dir /var/jenkins_home/caches/git-2601af00bcaa1f905abfe80179f52f9a/.git # timeout=10
+Setting origin to https://github.com/HarshitaMeshram/docker-sample-nginx_01.git
+ > git config remote.origin.url https://github.com/HarshitaMeshram/docker-sample-nginx_01.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git config --get remote.origin.url # timeout=10
+using GIT_SSH to set credentials GIT-PRI-CRED
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/dev
+Seen branch in repository origin/master
+Seen branch in repository origin/qa
+Seen 3 remote branches
+Obtained Jenkinsfile from 0c12e40f32f0d406c935c6aa889e81bc7099d1cf
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/DOCKER-PIPELINE_dev
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential GIT-PRI-CRED
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/HarshitaMeshram/docker-sample-nginx_01.git
+ > git init /var/jenkins_home/workspace/DOCKER-PIPELINE_dev # timeout=10
+Fetching upstream changes from https://github.com/HarshitaMeshram/docker-sample-nginx_01.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_SSH to set credentials GIT-PRI-CRED
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --no-tags --force --progress -- https://github.com/HarshitaMeshram/docker-sample-nginx_01.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/HarshitaMeshram/docker-sample-nginx_01.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 0c12e40f32f0d406c935c6aa889e81bc7099d1cf (dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 0c12e40f32f0d406c935c6aa889e81bc7099d1cf # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk 0c12e40f32f0d406c935c6aa889e81bc7099d1cf # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build Docker Image for DEV)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker build -t harshitameshram/dev:latest .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 132B done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/nginx:alpine
+#2 DONE 3.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 484B done
+#4 DONE 0.1s
+
+#5 [1/3] FROM docker.io/library/nginx:alpine@sha256:31bad00311cb5eeb8a6648beadcf67277a175da89989f14727420a80e2e76742
+#5 resolve docker.io/library/nginx:alpine@sha256:31bad00311cb5eeb8a6648beadcf67277a175da89989f14727420a80e2e76742 0.1s done
+#5 sha256:cb3218c8a053881bd00f4fa93e9f87e2c6204761e391b3aafc942f104362e538 2.50kB / 2.50kB done
+#5 sha256:5126dce06df729f9a22956013e160f8b581d47095beec332d647a5c1119b2411 0B / 629B 0.1s
+#5 sha256:ed3e62e73b33c9cfa4b253060771e4a9eebb751ab438052f197e847b4553a9ac 0B / 1.90MB 0.1s
+#5 sha256:31bad00311cb5eeb8a6648beadcf67277a175da89989f14727420a80e2e76742 8.71kB / 8.71kB done
+#5 sha256:e289a478ace02cd72f0a71a5b2ec0594495e1fae85faa10aae3b0da530812608 11.74kB / 11.74kB done
+#5 sha256:619be1103602d98e1963557998c954c892b3872986c27365e9f651f5bc27cab8 0B / 3.40MB 0.1s
+#5 sha256:619be1103602d98e1963557998c954c892b3872986c27365e9f651f5bc27cab8 1.05MB / 3.40MB 0.9s
+#5 sha256:619be1103602d98e1963557998c954c892b3872986c27365e9f651f5bc27cab8 3.40MB / 3.40MB 1.1s
+#5 sha256:5126dce06df729f9a22956013e160f8b581d47095beec332d647a5c1119b2411 629B / 629B 1.2s
+#5 sha256:619be1103602d98e1963557998c954c892b3872986c27365e9f651f5bc27cab8 3.40MB / 3.40MB 1.1s done
+#5 sha256:5126dce06df729f9a22956013e160f8b581d47095beec332d647a5c1119b2411 629B / 629B 1.2s done
+#5 sha256:ed3e62e73b33c9cfa4b253060771e4a9eebb751ab438052f197e847b4553a9ac 1.05MB / 1.90MB 1.3s
+#5 extracting sha256:619be1103602d98e1963557998c954c892b3872986c27365e9f651f5bc27cab8 0.2s
+#5 sha256:ed3e62e73b33c9cfa4b253060771e4a9eebb751ab438052f197e847b4553a9ac 1.90MB / 1.90MB 1.5s
+#5 sha256:2b1ab92f023179da00446365a60daa60d72a1edeb697fb81811e086eba2e0170 0B / 392B 1.5s
+#5 sha256:ed3e62e73b33c9cfa4b253060771e4a9eebb751ab438052f197e847b4553a9ac 1.90MB / 1.90MB 1.5s done
+#5 sha256:1d0dd2dc2265a581798226f7c79d134ac797f42db3f934dd4af1d38a6b89ce5c 0B / 957B 1.7s
+#5 sha256:6eba808ac059320c42179a6590b021f8695d3f12c2afa8745e219f635acf19d4 0B / 1.21kB 1.7s
+#5 extracting sha256:619be1103602d98e1963557998c954c892b3872986c27365e9f651f5bc27cab8 0.6s done
+#5 sha256:2b1ab92f023179da00446365a60daa60d72a1edeb697fb81811e086eba2e0170 392B / 392B 1.8s done
+#5 sha256:57038e85fbb88e96e34a84b125e568f540437561adb363fa791ff9e94e153dc1 0B / 1.40kB 1.9s
+#5 sha256:1d0dd2dc2265a581798226f7c79d134ac797f42db3f934dd4af1d38a6b89ce5c 957B / 957B 1.9s done
+#5 sha256:6eba808ac059320c42179a6590b021f8695d3f12c2afa8745e219f635acf19d4 1.21kB / 1.21kB 2.0s done
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 0B / 12.65MB 2.0s
+#5 sha256:57038e85fbb88e96e34a84b125e568f540437561adb363fa791ff9e94e153dc1 1.40kB / 1.40kB 2.1s done
+#5 extracting sha256:ed3e62e73b33c9cfa4b253060771e4a9eebb751ab438052f197e847b4553a9ac
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 1.05MB / 12.65MB 2.4s
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 3.15MB / 12.65MB 2.6s
+#5 extracting sha256:ed3e62e73b33c9cfa4b253060771e4a9eebb751ab438052f197e847b4553a9ac 0.6s done
+#5 extracting sha256:5126dce06df729f9a22956013e160f8b581d47095beec332d647a5c1119b2411 done
+#5 extracting sha256:1d0dd2dc2265a581798226f7c79d134ac797f42db3f934dd4af1d38a6b89ce5c done
+#5 extracting sha256:2b1ab92f023179da00446365a60daa60d72a1edeb697fb81811e086eba2e0170
+#5 extracting sha256:2b1ab92f023179da00446365a60daa60d72a1edeb697fb81811e086eba2e0170 done
+#5 extracting sha256:6eba808ac059320c42179a6590b021f8695d3f12c2afa8745e219f635acf19d4 done
+#5 extracting sha256:57038e85fbb88e96e34a84b125e568f540437561adb363fa791ff9e94e153dc1
+#5 extracting sha256:57038e85fbb88e96e34a84b125e568f540437561adb363fa791ff9e94e153dc1 done
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 5.24MB / 12.65MB 3.6s
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 7.34MB / 12.65MB 3.8s
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 9.44MB / 12.65MB 4.0s
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 11.53MB / 12.65MB 4.2s
+#5 sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 12.65MB / 12.65MB 4.3s done
+#5 extracting sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7
+#5 extracting sha256:eec94c9845c062c9f3495ce861d2bd9507bd7a13710de6b89a195a6b089ea8a7 1.0s done
+#5 DONE 6.0s
+
+#6 [2/3] COPY default.conf /etc/nginx/conf.d/
+#6 DONE 0.1s
+
+#7 [3/3] COPY index.html /usr/share/nginx/html/
+#7 DONE 0.1s
+
+#8 exporting to image
+#8 exporting layers 0.1s done
+#8 writing image sha256:7422fd65ec3bdb212b405018aa2558877a6538b836efe4c497938713962338e3 done
+#8 naming to docker.io/harshitameshram/dev:latest 0.0s done
+#8 DONE 0.2s
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withDockerRegistry
+$ docker login -u harshitameshram -p ******** https://registry.hub.docker.com/harshitameshram/dev
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/jenkins_home/workspace/DOCKER-PIPELINE_dev@tmp/07154cc6-fad6-422c-b8a2-268547ccddc0/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker tag harshitameshram/dev:latest registry.hub.docker.com/harshitameshram/dev:latest
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker push registry.hub.docker.com/harshitameshram/dev:latest
+The push refers to repository [registry.hub.docker.com/harshitameshram/dev]
+5074912d7687: Preparing
+06f1e1b12b26: Preparing
+13c52683b537: Preparing
+337b7d64083b: Preparing
+cdd311f34c29: Preparing
+3e8ad8bcb0ac: Preparing
+74b4ff8dbbd1: Preparing
+c018a48a857c: Preparing
+0f73163669d4: Preparing
+aedc3bda2944: Preparing
+74b4ff8dbbd1: Waiting
+c018a48a857c: Waiting
+0f73163669d4: Waiting
+aedc3bda2944: Waiting
+3e8ad8bcb0ac: Waiting
+cdd311f34c29: Pushed
+5074912d7687: Pushed
+06f1e1b12b26: Pushed
+337b7d64083b: Pushed
+74b4ff8dbbd1: Pushed
+c018a48a857c: Pushed
+3e8ad8bcb0ac: Pushed
+0f73163669d4: Pushed
+aedc3bda2944: Pushed
+13c52683b537: Pushed
+latest: digest: sha256:27647a9f62ad5f75fbd5899971e14e5f6a33f91330c8c36984686a7bffd4f2f9 size: 2403
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image for QA)
+Stage "Build Docker Image for QA" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Cleaning up...
+[Pipeline] deleteDir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+ 
+FOR QA 
+
+Started by user Harshita Meshram
+ > git rev-parse --resolve-git-dir /var/jenkins_home/caches/git-2601af00bcaa1f905abfe80179f52f9a/.git # timeout=10
+Setting origin to https://github.com/HarshitaMeshram/docker-sample-nginx_01.git
+ > git config remote.origin.url https://github.com/HarshitaMeshram/docker-sample-nginx_01.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git config --get remote.origin.url # timeout=10
+using GIT_SSH to set credentials GIT-PRI-CRED
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/dev
+Seen branch in repository origin/master
+Seen branch in repository origin/qa
+Seen 3 remote branches
+Obtained Jenkinsfile from a6e68b7f896d173b27e10254d15dfe99805c58f3
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/DOCKER-PIPELINE_qa
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential GIT-PRI-CRED
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/HarshitaMeshram/docker-sample-nginx_01.git
+ > git init /var/jenkins_home/workspace/DOCKER-PIPELINE_qa # timeout=10
+Fetching upstream changes from https://github.com/HarshitaMeshram/docker-sample-nginx_01.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_SSH to set credentials GIT-PRI-CRED
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --no-tags --force --progress -- https://github.com/HarshitaMeshram/docker-sample-nginx_01.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/HarshitaMeshram/docker-sample-nginx_01.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision a6e68b7f896d173b27e10254d15dfe99805c58f3 (qa)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f a6e68b7f896d173b27e10254d15dfe99805c58f3 # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk a6e68b7f896d173b27e10254d15dfe99805c58f3 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build Docker Image for DEV)
+Stage "Build Docker Image for DEV" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image for QA)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker build -t harshitameshram/qa:latest .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 132B done
+#1 DONE 0.2s
+
+#2 [internal] load metadata for docker.io/library/nginx:alpine
+#2 DONE 2.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [1/3] FROM docker.io/library/nginx:alpine@sha256:31bad00311cb5eeb8a6648beadcf67277a175da89989f14727420a80e2e76742
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 484B done
+#5 DONE 0.0s
+
+#6 [2/3] COPY default.conf /etc/nginx/conf.d/
+#6 CACHED
+
+#7 [3/3] COPY index.html /usr/share/nginx/html/
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 writing image sha256:7422fd65ec3bdb212b405018aa2558877a6538b836efe4c497938713962338e3 0.0s done
+#8 naming to docker.io/harshitameshram/qa:latest 0.0s done
+#8 DONE 0.0s
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withDockerRegistry
+$ docker login -u harshitameshram -p ******** https://registry.hub.docker.com/harshitameshram/qa
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/jenkins_home/workspace/DOCKER-PIPELINE_qa@tmp/df3e7fbe-ff0e-4f65-bfe9-892b58c4935e/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker tag harshitameshram/qa:latest registry.hub.docker.com/harshitameshram/qa:latest
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker push registry.hub.docker.com/harshitameshram/qa:latest
+The push refers to repository [registry.hub.docker.com/harshitameshram/qa]
+5074912d7687: Preparing
+06f1e1b12b26: Preparing
+13c52683b537: Preparing
+337b7d64083b: Preparing
+cdd311f34c29: Preparing
+3e8ad8bcb0ac: Preparing
+74b4ff8dbbd1: Preparing
+c018a48a857c: Preparing
+0f73163669d4: Preparing
+aedc3bda2944: Preparing
+74b4ff8dbbd1: Waiting
+c018a48a857c: Waiting
+0f73163669d4: Waiting
+aedc3bda2944: Waiting
+3e8ad8bcb0ac: Waiting
+5074912d7687: Mounted from harshitameshram/dev
+337b7d64083b: Mounted from harshitameshram/dev
+cdd311f34c29: Mounted from harshitameshram/dev
+06f1e1b12b26: Mounted from harshitameshram/dev
+13c52683b537: Mounted from harshitameshram/dev
+3e8ad8bcb0ac: Mounted from harshitameshram/dev
+c018a48a857c: Mounted from harshitameshram/dev
+74b4ff8dbbd1: Mounted from harshitameshram/dev
+0f73163669d4: Mounted from harshitameshram/dev
+aedc3bda2944: Mounted from harshitameshram/dev
+latest: digest: sha256:27647a9f62ad5f75fbd5899971e14e5f6a33f91330c8c36984686a7bffd4f2f9 size: 2403
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Cleaning up...
+[Pipeline] deleteDir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+
+
+
+
+
+
+
+
+
+
+
+
+2ND QUESTIONS 
+
+TERRAFORM THROUGH JENKINS 
+
+ADD PLUGIN  ===  AWS CREDENTIALS PLUGIN
+
+CREATE CREADS WITH AWS CREDENTIALS 
+
+CREATING INSTANCE
+
+Branch indexing
+ > git rev-parse --resolve-git-dir /var/jenkins_home/caches/git-5e660bae9144942cb5ed60162a131769/.git # timeout=10
+Setting origin to https://github.com/HarshitaMeshram/TERRAFORM_JENKINS.git
+ > git config remote.origin.url https://github.com/HarshitaMeshram/TERRAFORM_JENKINS.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+ > git config --get remote.origin.url # timeout=10
+using GIT_SSH to set credentials GIT-PRI-CRED
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/master
+Seen 1 remote branch
+Obtained Jenkinsfile from 19ddead411a6bc03abf66809292e75e66dec4227
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/TERRAFORM_JENKINS_master
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential GIT-PRI-CRED
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/HarshitaMeshram/TERRAFORM_JENKINS.git
+ > git init /var/jenkins_home/workspace/TERRAFORM_JENKINS_master # timeout=10
+Fetching upstream changes from https://github.com/HarshitaMeshram/TERRAFORM_JENKINS.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.2'
+using GIT_SSH to set credentials GIT-PRI-CRED
+Verifying host key using known hosts file
+You're using 'Known hosts file' strategy to verify ssh host keys, but your known_hosts file does not exist, please go to 'Manage Jenkins' -> 'Security' -> 'Git Host Key Verification Configuration' and configure host key verification.
+ > git fetch --no-tags --force --progress -- https://github.com/HarshitaMeshram/TERRAFORM_JENKINS.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/HarshitaMeshram/TERRAFORM_JENKINS.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 19ddead411a6bc03abf66809292e75e66dec4227 (master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 19ddead411a6bc03abf66809292e75e66dec4227 # timeout=10
+Commit message: "Create Jenkinsfile"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Environment Variables)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $AWS_ACCESS_KEY_ID or $AWS_SECRET_ACCESS_KEY
+[Pipeline] {
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Terraform Execution)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] echo
+Initializing Terraform...
+[Pipeline] sh
++ terraform init
+
+[0m[1mInitializing the backend...[0m
+
+[0m[1mInitializing provider plugins...[0m
+- Finding hashicorp/aws versions matching "5.40.0"...
+- Installing hashicorp/aws v5.40.0...
+- Installed hashicorp/aws v5.40.0 (signed by HashiCorp)
+
+Terraform has created a lock file [1m.terraform.lock.hcl[0m to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.[0m
+
+[0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
+[0m[32m
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.[0m
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Prompt for Terraform Action)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] input
+Input requested
+Approved by Harshita Meshram
+[Pipeline] sh
++ terraform apply -auto-approve
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # aws_instance.instance[0m will be created
+[0m  [32m+[0m[0m resource "aws_instance" "instance" {
+      [32m+[0m[0m ami                                  = "ami-080e1f13689e07408"
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m associate_public_ip_address          = (known after apply)
+      [32m+[0m[0m availability_zone                    = (known after apply)
+      [32m+[0m[0m cpu_core_count                       = (known after apply)
+      [32m+[0m[0m cpu_threads_per_core                 = (known after apply)
+      [32m+[0m[0m disable_api_stop                     = (known after apply)
+      [32m+[0m[0m disable_api_termination              = (known after apply)
+      [32m+[0m[0m ebs_optimized                        = (known after apply)
+      [32m+[0m[0m get_password_data                    = false
+      [32m+[0m[0m host_id                              = (known after apply)
+      [32m+[0m[0m host_resource_group_arn              = (known after apply)
+      [32m+[0m[0m iam_instance_profile                 = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_initiated_shutdown_behavior = (known after apply)
+      [32m+[0m[0m instance_lifecycle                   = (known after apply)
+      [32m+[0m[0m instance_state                       = (known after apply)
+      [32m+[0m[0m instance_type                        = "t2.micro"
+      [32m+[0m[0m ipv6_address_count                   = (known after apply)
+      [32m+[0m[0m ipv6_addresses                       = (known after apply)
+      [32m+[0m[0m key_name                             = (known after apply)
+      [32m+[0m[0m monitoring                           = (known after apply)
+      [32m+[0m[0m outpost_arn                          = (known after apply)
+      [32m+[0m[0m password_data                        = (known after apply)
+      [32m+[0m[0m placement_group                      = (known after apply)
+      [32m+[0m[0m placement_partition_number           = (known after apply)
+      [32m+[0m[0m primary_network_interface_id         = (known after apply)
+      [32m+[0m[0m private_dns                          = (known after apply)
+      [32m+[0m[0m private_ip                           = (known after apply)
+      [32m+[0m[0m public_dns                           = (known after apply)
+      [32m+[0m[0m public_ip                            = (known after apply)
+      [32m+[0m[0m secondary_private_ips                = (known after apply)
+      [32m+[0m[0m security_groups                      = (known after apply)
+      [32m+[0m[0m source_dest_check                    = true
+      [32m+[0m[0m spot_instance_request_id             = (known after apply)
+      [32m+[0m[0m subnet_id                            = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Name" = "Jenkins"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Name" = "Jenkins"
+        }
+      [32m+[0m[0m tenancy                              = (known after apply)
+      [32m+[0m[0m user_data                            = (known after apply)
+      [32m+[0m[0m user_data_base64                     = (known after apply)
+      [32m+[0m[0m user_data_replace_on_change          = false
+      [32m+[0m[0m vpc_security_group_ids               = (known after apply)
+    }
+
+[1mPlan:[0m 1 to add, 0 to change, 0 to destroy.
+[0m[0m[1maws_instance.instance: Creating...[0m[0m
+[0m[1maws_instance.instance: Still creating... [10s elapsed][0m[0m
+[0m[1maws_instance.instance: Still creating... [20s elapsed][0m[0m
+[0m[1maws_instance.instance: Creation complete after 28s [id=i-0a5a623d76bcaaada][0m
+[0m[1m[32m
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+[0m
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Cleaning up...
+[Pipeline] deleteDir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+
+ 
+
